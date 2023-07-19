@@ -1,4 +1,3 @@
-import tensorflow as tf
 import keras
 import cv2
 import numpy as np
@@ -12,13 +11,13 @@ import pyautogui
 '''
 hand = input("Hand (L or R): ").upper()
 pause = False
-
+ 
 def empty(e):
     pass
 
 def createHSVTrackBar():
-    l_b = [0,36,94]
-    u_b = [24,255,255]
+    l_b = [0,61,118]
+    u_b = [21,255,255]
     cv2.namedWindow("trackbar")
     cv2.createTrackbar("lh","trackbar",l_b[0],255,empty)
     cv2.createTrackbar("uh","trackbar",u_b[0],255,empty)
@@ -40,7 +39,7 @@ def getHSVTrackbarValues():
     return l_b,u_b
 
 def createThreshTrackBar():
-    l_b = 138
+    l_b = 207
     cv2.namedWindow("trackbar")
     cv2.createTrackbar("lb", "trackbar", l_b, 255, empty)
     cv2.createTrackbar("ub", "trackbar", 255, 255, empty)
@@ -88,7 +87,7 @@ def executeTask(task):
 
 def preprocess_image(frame):
 
-    #-------PRIOR CLEANUP OF BACKGROUND WITH THRESHOLD-------#
+    #-------PRIOR CLEANUP OF BACKGROUND WITH THRESHOLD-------#   
     th_lb,th_ub = getThreshTrackBar()
     mask = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
     _,mask = cv2.threshold(mask,th_lb,th_ub,cv2.THRESH_BINARY_INV)
